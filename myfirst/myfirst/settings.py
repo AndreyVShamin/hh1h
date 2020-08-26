@@ -12,16 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os, sys
 
-
 # My function to return secret Django key from common secret database /var/sqlite.db3
-import sqlite3
-def secret(application):
-    conn = sqlite3.connect("/var/.secret.db3")
-    cursor = conn.cursor()
-    cursor.execute("SELECT secret FROM pass WHERE app LIKE '{}'".format(application))
-    sec = cursor.fetchone()[0]
-    conn.close()
-    return sec
+#from .secret import secret
+from . import secret
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +26,8 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret('DJANGO01')
+# SECRET_KEY = secret('DJANGO01')
+SECRET_KEY = secret.secret('DJANGO01')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
