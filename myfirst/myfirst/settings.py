@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os, sys
 
 
-# My function to return secret Django key from common secret databases /var/sqlite.db3
+# My function to return secret Django key from common secret database /var/sqlite.db3
 import sqlite3
 def secret(application):
     conn = sqlite3.connect("/var/.secret.db3")
